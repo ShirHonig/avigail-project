@@ -1,0 +1,72 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="project2.Site1" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <title>Recipe Website</title>
+    <link href="StyleSheet1.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server" />
+</head>
+<body>
+    <header>
+        <div class="header">
+            <h1>Tasty Recipes</h1>
+            <p>Here you will find a variety of fun and tasty recipes!</p>
+        </div>
+    </header>
+
+    <form id="form1" runat="server">
+        <nav>
+            <ul class="nav-main">
+                <li runat="server" id="Recipes" class="dropdown">
+                    <a href="#" class="dropdown-toggle">Recipes</a>
+                    <ul class="dropdown-menu">
+                        <li runat="server" id="RecipesItem"><a href="Recipes.aspx">All Recipes</a></li>
+                        <li runat="server" id="Muffins"><a href="Muffins.aspx">Muffins</a></li>
+                        <li runat="server" id="Cookies"><a href="Cookies.aspx">Cookies</a></li>
+                        <li runat="server" id="Brownies"><a href="Brownies.aspx">Brownies</a></li>
+                        <li runat="server" id="Rolls"><a href="Rolls.aspx">Cinnamon Rolls</a></li>
+                        <li runat="server" id="Soufle"><a href="Soufle.aspx">Soufle</a></li>
+                    </ul>
+                </li>
+                <li runat="server" id="Logout"><a href="LogOut.aspx">Log Out</a></li>
+                <li runat="server" id="Sessions"><a href="Admin2.aspx">Sessions</a></li>
+                <li runat="server" id="UsersTable"><a href="AdminUsers.aspx">Users Table</a></li>
+            </ul>
+        </nav>
+
+        <!-- Guest Menu -->
+        <asp:Panel ID="guestMenu" runat="server" Visible="true">
+            <asp:HyperLink NavigateUrl="~/Main.aspx" Text="Home" runat="server" />
+            <asp:HyperLink NavigateUrl="~/LogIn.aspx" Text="Login" runat="server" />
+            <asp:HyperLink NavigateUrl="~/SignUp.aspx" Text="Sign Up" runat="server" />
+        </asp:Panel>
+
+        <!-- Registered User Menu -->
+        <asp:Panel ID="userMenu" runat="server" Visible="false">
+            <asp:HyperLink NavigateUrl="~/Main.aspx" Text="Home" runat="server" />
+            <asp:HyperLink NavigateUrl="~/Recipes/MyRecipes.aspx" Text="My Recipes" runat="server" />
+            <asp:HyperLink NavigateUrl="~/Recipes/Favorites.aspx" Text="Favorites" runat="server" />
+            <div class="user-info">
+                Welcome, <asp:Label ID="lblUsername" runat="server" />
+                <asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="btnLogout_Click" />
+            </div>
+        </asp:Panel>
+
+        <!-- Admin Menu -->
+        <asp:Panel ID="adminMenu" runat="server" Visible="false">
+            <asp:HyperLink NavigateUrl="~/Main.aspx" Text="Home" runat="server" />
+            <asp:HyperLink NavigateUrl="~/Admin/Users.aspx" Text="Manage Users" runat="server" />
+            <asp:HyperLink NavigateUrl="~/Admin/Statistics.aspx" Text="Statistics" runat="server" />
+            <div class="user-info">
+                Welcome Admin, <asp:Label ID="lblAdminUsername" runat="server" />
+                <asp:Button ID="btnAdminLogout" runat="server" Text="Logout" OnClick="btnLogout_Click" />
+            </div>
+        </asp:Panel>
+
+        <div class="content">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" />
+        </div>
+    </form>
+</body>
+</html>

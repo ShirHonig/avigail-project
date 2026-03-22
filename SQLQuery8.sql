@@ -1,0 +1,3 @@
+﻿SELECT DISTINCT City
+FROM tblUsers 
+WHERE City IS NOT NULL;

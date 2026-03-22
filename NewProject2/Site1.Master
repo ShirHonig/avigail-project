@@ -1,0 +1,73 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.Master.cs" Inherits="project2.Site1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <link rel="stylesheet" href="StyleSheet1.css">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .auto-style1 
+        {
+            width: 39%;
+        }
+        .user-info {
+            text-align: right;
+            padding: 10px;
+            background-color: #f0f0f0;
+        }
+        .menu-container {
+            background-color: #333;
+            padding: 10px;
+        }
+        .menu-container a {
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .menu-container a:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="user-info">
+            Welcome <asp:Label ID="lblUsername" runat="server" Text="Guest"></asp:Label>
+            <asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="btnLogout_Click" Visible="false" />
+        </div>
+        
+        <div class="menu-container">
+            <!-- Guest Menu -->
+            <asp:Panel ID="guestMenu" runat="server">
+                <a href="~/Default.aspx" runat="server">Home</a>
+                <a href="~/Login.aspx" runat="server">Login</a>
+                <a href="~/Register.aspx" runat="server">Register</a>
+            </asp:Panel>
+
+            <!-- User Menu -->
+            <asp:Panel ID="userMenu" runat="server" Visible="false">
+                <a href="~/Default.aspx" runat="server">Home</a>
+                <a href="~/Recipes.aspx" runat="server">Recipes</a>
+                <a href="~/Profile.aspx" runat="server">Profile</a>
+            </asp:Panel>
+
+            <!-- Admin Menu -->
+            <asp:Panel ID="adminMenu" runat="server" Visible="false">
+                <a href="~/Default.aspx" runat="server">Home</a>
+                <a href="~/Admin/Users.aspx" runat="server">Manage Users</a>
+                <a href="~/Admin/Statistics.aspx" runat="server">Statistics</a>
+            </asp:Panel>
+        </div>
+
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>

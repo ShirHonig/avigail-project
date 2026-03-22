@@ -1,0 +1,3 @@
+﻿SELECT COUNT(*) AS UsersOver18
+FROM tblUsers 
+WHERE DATEDIFF(YEAR, BirthDate, GETDATE()) > 18;
