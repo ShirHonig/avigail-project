@@ -3,15 +3,15 @@
 <!DOCTYPE html>
 <html>
 <head runat="server">
-    <title>Recipe Website</title>
+    <title>Strength Training Hub</title>
     <link href="StyleSheet1.css" rel="stylesheet" />
     <asp:ContentPlaceHolder ID="head" runat="server" />
 </head>
 <body>
     <header>
         <div class="header">
-            <h1>Tasty Recipes</h1>
-            <p>Here you will find a variety of fun and tasty recipes!</p>
+            <h1>Strength Training Hub</h1>
+            <p>Build strength with focused workouts for every muscle group.</p>
         </div>
     </header>
 
@@ -19,14 +19,14 @@
         <nav>
             <ul class="nav-main">
                 <li runat="server" id="Recipes" class="dropdown">
-                    <a href="#" class="dropdown-toggle">Recipes</a>
+                    <a href="#" class="dropdown-toggle">Workouts</a>
                     <ul class="dropdown-menu">
-                        <li runat="server" id="RecipesItem"><a href="Recipes.aspx">All Recipes</a></li>
-                        <li runat="server" id="Muffins"><a href="Muffins.aspx">Muffins</a></li>
-                        <li runat="server" id="Cookies"><a href="Cookies.aspx">Cookies</a></li>
-                        <li runat="server" id="Brownies"><a href="Brownies.aspx">Brownies</a></li>
-                        <li runat="server" id="Rolls"><a href="Rolls.aspx">Cinnamon Rolls</a></li>
-                        <li runat="server" id="Soufle"><a href="Soufle.aspx">Soufle</a></li>
+                        <li runat="server" id="RecipesItem"><a href="/Workouts.aspx">All Workouts</a></li>
+                        <li runat="server" id="Muffins"><a href="/Arms.aspx">Arms</a></li>
+                        <li runat="server" id="Cookies"><a href="/Legs.aspx">Legs</a></li>
+                        <li runat="server" id="Brownies"><a href="/Chest.aspx">Chest</a></li>
+                        <li runat="server" id="Rolls"><a href="/Shoulders.aspx">Shoulders</a></li>
+                        <li runat="server" id="Soufle"><a href="/FullBody.aspx">Full Body</a></li>
 
                     </ul>
                 </li>
@@ -54,8 +54,8 @@
         <asp:Panel ID="userMenu" runat="server" Visible="false">
             <asp:HyperLink NavigateUrl='<%# "~/UpdateUser.aspx?UserId=" + Session["UserId"] %>' Text="" runat="server" />
             <asp:HyperLink NavigateUrl="~/Main.aspx" Text="Home" runat="server" />
-            <asp:HyperLink NavigateUrl="~/Recipes/MyRecipes.aspx" Text="My Recipes" runat="server" />
-            <asp:HyperLink NavigateUrl="~/Recipes/Favorites.aspx" Text="Favorites" runat="server" />
+            <asp:HyperLink NavigateUrl="~/Workouts/MyWorkouts.aspx" Text="My Workouts" runat="server" />
+            <asp:HyperLink NavigateUrl="~/Workouts/Favorites.aspx" Text="Favorites" runat="server" />
             <asp:HyperLink NavigateUrl="~/PasswordRecovery.aspx" Text="Password Recovery" runat="server" />
 
             <div class="user-info">

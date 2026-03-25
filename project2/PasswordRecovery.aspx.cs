@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Web.UI;
 
@@ -6,7 +7,7 @@ namespace project2
 {
     public partial class PasswordRecovery : System.Web.UI.Page
     {
-        private string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\RecipesDB.mdf;Integrated Security=True";
+        private string connectionString = ConfigurationManager.ConnectionStrings["RecipesDBConnection"].ConnectionString;
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             try

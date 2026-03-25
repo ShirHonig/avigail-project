@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.UI.WebControls;
@@ -7,7 +8,9 @@ namespace project2
 {
     public partial class AdminUsers : System.Web.UI.Page
     {
-        private string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\RecipesDB.mdf;Integrated Security=True"; protected void Page_Load(object sender, EventArgs e)
+        private string connectionString = ConfigurationManager.ConnectionStrings["RecipesDBConnection"].ConnectionString;
+
+        protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {

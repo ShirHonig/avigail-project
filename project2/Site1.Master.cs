@@ -24,8 +24,8 @@ namespace project2
                 lblAdminUsername.Text = username;
 
                 // Control nav links visibility
-                Recipes.Visible = isLoggedIn; // Dropdown parent
-                RecipesItem.Visible = isLoggedIn; // All Recipes in dropdown
+                Recipes.Visible = isLoggedIn; // Dropdown parent (Workouts)
+                RecipesItem.Visible = isLoggedIn; // All Workouts in dropdown
                 Muffins.Visible = isLoggedIn;
                 Cookies.Visible = isLoggedIn;
                 Brownies.Visible = isLoggedIn;

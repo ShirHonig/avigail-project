@@ -75,24 +75,26 @@
     <Content Include="App_Data\RecipesDB_log.ldf">
       <DependentUpon>RecipesDB.mdf</DependentUpon>
     </Content>
+    <Content Include="Arms.aspx" />
+    <Content Include="Chest.aspx" />
+    <Content Include="FullBody.aspx" />
     <Content Include="Global.asax" />
     <Content Include="InsertUsers.sql" />
+    <Content Include="Legs.aspx" />
     <Content Include="LogOut.aspx" />
     <Content Include="PasswordRecovery.aspx" />
+    <Content Include="Shoulders.aspx" />
     <Content Include="SignUp.aspx" />
     <Content Include="LogIn.aspx" />
-    <Content Include="Recipes.aspx" />
-    <Content Include="Cookies.aspx" />
-    <Content Include="Brownies.aspx" />
-    <Content Include="Rolls.aspx" />
-    <Content Include="Muffins.aspx" />
-    <Content Include="Soufle.aspx" />
     <Content Include="StyleSheet1.css" />
     <Content Include="UpdateUser.aspx" />
     <Content Include="UsersList.aspx" />
     <Content Include="UsersTable.aspx" />
     <Content Include="Web.config" />
     <Content Include="Main.aspx" />
+    <Content Include="Workouts.aspx" />
+    <Content Include="Workouts\Favorites.aspx" />
+    <Content Include="Workouts\MyWorkouts.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Admin1.aspx.cs">
@@ -154,48 +156,6 @@
     </Compile>
     <Compile Include="LogIn.aspx.designer.cs">
       <DependentUpon>LogIn.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Recipes.aspx.cs">
-      <DependentUpon>Recipes.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Recipes.aspx.designer.cs">
-      <DependentUpon>Recipes.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Cookies.aspx.cs">
-      <DependentUpon>Cookies.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Cookies.aspx.designer.cs">
-      <DependentUpon>Cookies.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Brownies.aspx.cs">
-      <DependentUpon>Brownies.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Brownies.aspx.designer.cs">
-      <DependentUpon>Brownies.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Rolls.aspx.cs">
-      <DependentUpon>Rolls.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Rolls.aspx.designer.cs">
-      <DependentUpon>Rolls.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Muffins.aspx.cs">
-      <DependentUpon>Muffins.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Muffins.aspx.designer.cs">
-      <DependentUpon>Muffins.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Soufle.aspx.cs">
-      <DependentUpon>Soufle.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Soufle.aspx.designer.cs">
-      <DependentUpon>Soufle.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site1.Master.cs">

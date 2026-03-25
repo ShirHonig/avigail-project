@@ -6,6 +6,27 @@ namespace project2
 {
     public class Global : System.Web.HttpApplication
     {
+        private static void EnsureLocalDbDatabase(string databaseName)
+        {
+            string masterConnectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30";
+
+            using (SqlConnection conn = new SqlConnection(masterConnectionString))
+            {
+                conn.Open();
+                string escapedDbName = databaseName.Replace("]", "]]" );
+                string sql = $@"
+IF DB_ID(N'{escapedDbName}') IS NULL
+BEGIN
+    EXEC('CREATE DATABASE [{escapedDbName}]');
+END";
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         protected void Application_Start(object sender, EventArgs e)
         {
             // Initialize Application state variables
@@ -17,12 +38,57 @@ namespace project2
             Application["DebugInit"] = "Initialized at " + DateTime.Now.ToString();
             Application.UnLock();
             Application["DebugInit"] = "Application_Start called at " + DateTime.Now.ToString();
+
+            try
+            {
+                EnsureLocalDbDatabase("RecipesDB_AvigailProject2");
+            }
+            catch (Exception ex)
+            {
+                Application["DebugInit"] = Application["DebugInit"] + "; DB create failed: " + ex.Message;
+            }
+
             try
             {
                 string connString = System.Configuration.ConfigurationManager.ConnectionStrings["RecipesDBConnection"].ConnectionString;
                 using (SqlConnection conn = new SqlConnection(connString))
                 {
                     conn.Open();
+
+                    string ensureTableSql = @"
+IF OBJECT_ID('dbo.tblUsers', 'U') IS NULL
+BEGIN
+    CREATE TABLE dbo.tblUsers
+    (
+        UserId INT IDENTITY(1,1) PRIMARY KEY,
+        Username NVARCHAR(50) NOT NULL,
+        [Password] NVARCHAR(50) NOT NULL,
+        FirstName NVARCHAR(50) NOT NULL,
+        LastName NVARCHAR(50) NOT NULL,
+        Email NVARCHAR(100) NULL,
+        BirthDate DATE NULL,
+        City NVARCHAR(50) NULL,
+        Gender NVARCHAR(10) NULL,
+        Admin BIT NOT NULL DEFAULT(0)
+    );
+END";
+                    using (SqlCommand ensureCmd = new SqlCommand(ensureTableSql, conn))
+                    {
+                        ensureCmd.ExecuteNonQuery();
+                    }
+
+                    string updateAdminSql = @"
+IF EXISTS (SELECT 1 FROM tblUsers WHERE Admin = 1)
+BEGIN
+    UPDATE TOP (1) tblUsers
+    SET Username = 'Avigail', [Password] = 'Avigail1!'
+    WHERE Admin = 1;
+END";
+                    using (SqlCommand updateAdminCmd = new SqlCommand(updateAdminSql, conn))
+                    {
+                        updateAdminCmd.ExecuteNonQuery();
+                    }
+
                     string checkSql = "SELECT COUNT(*) FROM tblUsers";
                     using (SqlCommand checkCmd = new SqlCommand(checkSql, conn))
                     {
@@ -166,8 +232,6 @@ namespace project2
                         cmd.Parameters.AddWithValue("@Admin", false);
                         cmd.ExecuteNonQuery();
                         cmd.Parameters.Clear();
-
-
                     }
                     Application["DebugInit"] = Application["DebugInit"] + "; Users inserted successfully";
                 }
@@ -177,6 +241,7 @@ namespace project2
                 Application["DebugInit"] = Application["DebugInit"] + "; User insert failed: " + ex.Message;
             }
         }
+
         protected void Session_Start(object sender, EventArgs e)
         {
             // Increment session counter

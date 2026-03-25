@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.UI;
@@ -7,7 +8,7 @@ namespace project2
 {
     public partial class UpdateUser : System.Web.UI.Page
     {
-        private string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\RecipesDB.mdf;Integrated Security=True";
+        private string connectionString = ConfigurationManager.ConnectionStrings["RecipesDBConnection"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -22,9 +23,12 @@ namespace project2
                 int userId;
                 if (!int.TryParse(Request.QueryString["UserId"], out userId))
                 {
-                    message.Text = "Invalid user ID.";
-                    btnSubmit.Visible = false;
-                    return;
+                    if (Session["UserId"] == null || !int.TryParse(Session["UserId"].ToString(), out userId))
+                    {
+                        message.Text = "Invalid user ID.";
+                        btnSubmit.Visible = false;
+                        return;
+                    }
                 }
 
                 if (userId != Convert.ToInt32(Session["UserId"]) && (Session["Admin"] == null || !(bool)Session["Admin"]))
@@ -80,12 +84,15 @@ namespace project2
         {
             try
             {
+                int userId = Convert.ToInt32(Session["UserId"]);
+
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     // Check for existing username (excluding current user)
                     string checkQuery = "SELECT COUNT(*) FROM tblUsers WHERE Username = @Username AND UserId != @UserId";
                     SqlCommand checkCmd = new SqlCommand(checkQuery, conn);
                     checkCmd.Parameters.AddWithValue("@Username", txtUsername.Text);
+                    checkCmd.Parameters.AddWithValue("@UserId", userId);
                     conn.Open();
                     int count = (int)checkCmd.ExecuteScalar();
                     if (count > 0)
@@ -110,6 +117,7 @@ namespace project2
                     cmd.Parameters.AddWithValue("@City", string.IsNullOrEmpty(txtCity.Text) ? (object)DBNull.Value : txtCity.Text);
                     cmd.Parameters.AddWithValue("@Gender", rblGender.SelectedValue);
                     cmd.Parameters.AddWithValue("@Admin", chkAdmin.Checked);
+                    cmd.Parameters.AddWithValue("@UserId", userId);
                     adapter.UpdateCommand = cmd;
                     conn.Open();
                     cmd.ExecuteNonQuery();

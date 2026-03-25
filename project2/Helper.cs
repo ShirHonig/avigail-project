@@ -9,12 +9,8 @@ namespace project2
 {
     public static class Helper
     {
-       
-        
-            public const string DBName = "Database1.mdf";
             public const string tblName = "tblUsers";
-            public const string conString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\USERS\DANIELLE\ONEDRIVE\DOCUMENTS\MY PROJECTS\SKIWEBSITE\SKIWEBSITE\APP_DATA\"
-            + DBName + "\";Integrated Security=True";
+            public const string conString = "Data Source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=RecipesDB_AvigailProject2;Integrated Security=True;Connect Timeout=30";
 
             public static DataSet RetrieveTable(string SQLStr)
             {
@@ -45,7 +41,6 @@ namespace project2
                 con.Close();
                 return scalar;
             }
-        
     }
 
 }
