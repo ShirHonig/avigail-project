@@ -10,7 +10,6 @@ namespace YourProjectName
         private string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\RecipesDB.mdf;Integrated Security=True";
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Check if user is admin
             if (Session["Admin"] == null || !(bool)Session["Admin"])
             {
                 lblError.Text = "Access denied. Admins only.";
@@ -29,7 +28,6 @@ namespace YourProjectName
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 string query = "SELECT * FROM tblUsers";
-                // Apply filters if provided
                 string whereClause = "";
                 if (!string.IsNullOrEmpty(txtUsernameFilter.Text) || !string.IsNullOrEmpty(txtFirstNameFilter.Text) || !string.IsNullOrEmpty(txtLastNameFilter.Text))
                 {
@@ -54,7 +52,6 @@ namespace YourProjectName
                     query += whereClause;
                 }
 
-                // Apply sorting
                 if (!string.IsNullOrEmpty(sortExpression))
                 {
                     query += $" ORDER BY {sortExpression}";

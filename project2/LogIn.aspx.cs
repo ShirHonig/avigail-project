@@ -12,13 +12,11 @@ namespace project2
         {
             if (!IsPostBack)
             {
-                // Generate anti-forgery token
                 var token = Guid.NewGuid().ToString();
                 Session["AntiForgeryToken"] = token;
                 hfAntiForgery.Value = token;
                 Session["LoginAttempts"] = 0;
 
-                // Redirect if already logged in
                 if (Session["Login"] != null && (bool)Session["Login"])
                 {
                     Response.Redirect("Main.aspx");
@@ -28,14 +26,12 @@ namespace project2
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            // Verify anti-forgery token
             if (hfAntiForgery.Value != Session["AntiForgeryToken"]?.ToString())
             {
                 message.Text = "Invalid form submission.";
                 return;
             }
 
-            // Check login attempts
             int attempts = (int)(Session["LoginAttempts"] ?? 0);
             if (attempts >= 5)
             {
@@ -48,7 +44,6 @@ namespace project2
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text.Trim();
 
-            // Server-side validation (reusing your logic)
             if (username.Length < 2)
             {
                 message.Text = "Username must be at least 2 characters.";
@@ -98,7 +93,6 @@ namespace project2
                 return;
             }
 
-            // Authenticate against tblUsers
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))

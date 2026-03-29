@@ -29,7 +29,6 @@ END";
 
         protected void Application_Start(object sender, EventArgs e)
         {
-            // Initialize Application state variables
             Application.Lock();
             Application["SessionsNum"] = 0;
             Application["LoginSessions"] = 0;
@@ -103,7 +102,6 @@ END";
                                         VALUES (@Username, @Password, @FirstName, @LastName, @Email, @BirthDate, @City, @Gender, @Admin)";
                     using (SqlCommand cmd = new SqlCommand(insertSql, conn))
                     {
-                        // User 1: Shelly12 (Admin)
                         cmd.Parameters.AddWithValue("@Username", "Shelly12");
                         cmd.Parameters.AddWithValue("@Password", "Shelly2008!");
                         cmd.Parameters.AddWithValue("@FirstName", "Shelly");
@@ -116,7 +114,6 @@ END";
                         cmd.ExecuteNonQuery();
                         cmd.Parameters.Clear();
 
-                        // User 2: Yulie12 (Admin)
                         cmd.Parameters.AddWithValue("@Username", "Yulie12");
                         cmd.Parameters.AddWithValue("@Password", "Yule2010!");
                         cmd.Parameters.AddWithValue("@FirstName", "Yulie");
@@ -129,7 +126,6 @@ END";
                         cmd.ExecuteNonQuery();
                         cmd.Parameters.Clear();
 
-                        // User 3: Avigail1
                         cmd.Parameters.AddWithValue("@Username", "Avigail1");
                         cmd.Parameters.AddWithValue("@Password", "Avigail28!");
                         cmd.Parameters.AddWithValue("@FirstName", "Avigail");
@@ -142,7 +138,6 @@ END";
                         cmd.ExecuteNonQuery();
                         cmd.Parameters.Clear();
 
-                        // User 4: Ofri12
                         cmd.Parameters.AddWithValue("@Username", "Ofri12");
                         cmd.Parameters.AddWithValue("@Password", "Ofri2007!");
                         cmd.Parameters.AddWithValue("@FirstName", "Ofri");
@@ -155,7 +150,6 @@ END";
                         cmd.ExecuteNonQuery();
                         cmd.Parameters.Clear();
 
-                        // User 5: Emily12
                         cmd.Parameters.AddWithValue("@Username", "Emily12");
                         cmd.Parameters.AddWithValue("@Password", "Emily1200!");
                         cmd.Parameters.AddWithValue("@FirstName", "Emily");
@@ -168,7 +162,6 @@ END";
                         cmd.ExecuteNonQuery();
                         cmd.Parameters.Clear();
 
-                        // User 6: Luke12
                         cmd.Parameters.AddWithValue("@Username", "Luke12");
                         cmd.Parameters.AddWithValue("@Password", "Luke1200!");
                         cmd.Parameters.AddWithValue("@FirstName", "Ofri");
@@ -181,7 +174,6 @@ END";
                         cmd.ExecuteNonQuery();
                         cmd.Parameters.Clear();
 
-                        // User 7: Lucy12
                         cmd.Parameters.AddWithValue("@Username", "Ofri12");
                         cmd.Parameters.AddWithValue("@Password", "Ofri2007!");
                         cmd.Parameters.AddWithValue("@FirstName", "Ofri");
@@ -194,7 +186,6 @@ END";
                         cmd.ExecuteNonQuery();
                         cmd.Parameters.Clear();
 
-                        // User 8: Yael13
                         cmd.Parameters.AddWithValue("@Username", "Ofri12");
                         cmd.Parameters.AddWithValue("@Password", "Ofri2007!");
                         cmd.Parameters.AddWithValue("@FirstName", "Ofri");
@@ -207,7 +198,6 @@ END";
                         cmd.ExecuteNonQuery();
                         cmd.Parameters.Clear();
 
-                        // User 9: Yonatan15
                         cmd.Parameters.AddWithValue("@Username", "Ofri12");
                         cmd.Parameters.AddWithValue("@Password", "Ofri2007!");
                         cmd.Parameters.AddWithValue("@FirstName", "Ofri");
@@ -220,7 +210,6 @@ END";
                         cmd.ExecuteNonQuery();
                         cmd.Parameters.Clear();
 
-                        // User 10: Elan15
                         cmd.Parameters.AddWithValue("@Username", "Ofri12");
                         cmd.Parameters.AddWithValue("@Password", "Ofri2007!");
                         cmd.Parameters.AddWithValue("@FirstName", "Ofri");
@@ -244,7 +233,6 @@ END";
 
         protected void Session_Start(object sender, EventArgs e)
         {
-            // Increment session counter
             Application.Lock();
             Application["SessionsNum"] = (int)Application["SessionsNum"] + 1;
             Application["currentSession"] = (int)Application["currentSession"] + 1;
@@ -253,7 +241,6 @@ END";
 
         protected void Session_End(object sender, EventArgs e)
         {
-            // Decrement session counter
             Application.Lock();
             Application["currentSession"] = (int)Application["currentSession"] - 1;
             if (Session["Login"] != null && (bool)Session["Login"])

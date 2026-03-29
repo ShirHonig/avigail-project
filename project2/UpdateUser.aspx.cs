@@ -88,7 +88,6 @@ namespace project2
 
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    // Check for existing username (excluding current user)
                     string checkQuery = "SELECT COUNT(*) FROM tblUsers WHERE Username = @Username AND UserId != @UserId";
                     SqlCommand checkCmd = new SqlCommand(checkQuery, conn);
                     checkCmd.Parameters.AddWithValue("@Username", txtUsername.Text);
@@ -102,7 +101,6 @@ namespace project2
                     }
                     conn.Close();
 
-                    // Update user
                     string query = "UPDATE tblUsers SET Username = @Username, Password = @Password, FirstName = @FirstName, " +
                                    "LastName = @LastName, Email = @Email, BirthDate = @BirthDate, City = @City, " +
                                    "Gender = @Gender, Admin = @Admin WHERE UserId = @UserId";
@@ -132,7 +130,6 @@ namespace project2
         }
         protected void btnReset_Click(object sender, EventArgs e)
         {
-            // Handled client-side by resetForm()
         }
     }
 }

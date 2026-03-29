@@ -13,7 +13,6 @@ namespace project2
         {
             if (!IsPostBack)
             {
-                // Redirect if already logged in
                 if (Session["Login"] != null && (bool)Session["Login"])
                 {
                     Response.Redirect("Main.aspx");
@@ -27,7 +26,6 @@ namespace project2
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    // Check for existing username
                     string checkQuery = "SELECT COUNT(*) FROM tblUsers WHERE Username = @Username";
                     SqlCommand checkCmd = new SqlCommand(checkQuery, conn);
                     checkCmd.Parameters.AddWithValue("@Username", txtUsername.Text);
@@ -40,7 +38,6 @@ namespace project2
                     }
                     conn.Close();
 
-                    // Insert new user
                     string query = "INSERT INTO tblUsers (Username, Password, FirstName, LastName, Email, BirthDate, City, Gender, Admin) " +
                                    "VALUES (@Username, @Password, @FirstName, @LastName, @Email, @BirthDate, @City, @Gender, @Admin)";
                     SqlDataAdapter adapter = new SqlDataAdapter();
@@ -71,7 +68,6 @@ namespace project2
         }
         protected void btnReset_Click(object sender, EventArgs e)
         {
-            // Handled client-side by resetForm()
         }
     }
 }

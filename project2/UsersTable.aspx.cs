@@ -33,27 +33,6 @@ namespace project2
             }
         public DataSet RetrieveUsersTable(string SQLStr)
         {
-            // Connect to Database
-            //string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\lexte\OneDrive\Documents\Visual Studio 2022\SkiWebsite\SkiWebsite\App_Data\Database1.mdf"";Integrated Security=True";
-            //SqlConnection con = new SqlConnection(connectionString);
-
-            //Build SQL Query
-            //SqlCommand cmd = new SqlCommand();
-            //cmd.CommandText = SQLStr;
-            //cmd.Connection = con;
-
-            //Build DataAdapter
-            // ad = new SqlDataAdapter(cmd);
-
-            //Build dataset to store the data
-            //DataSet ds = new DataSet();
-
-            //Get the data from DataBase into the dataset
-            //con.Open();
-            //ad.Fill(ds, "users");
-            //con.Close();
-
-
             return Helper.RetrieveTable(SQLStr);
         }
 
@@ -116,17 +95,14 @@ namespace project2
         }
         public void Delete(object sender, EventArgs e)
         {
-            //string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\lexte\OneDrive\Documents\Visual Studio 2022\SkiWebsite\SkiWebsite\App_Data\Database1.mdf"";Integrated Security=True";
             SqlConnection con = new SqlConnection(Helper.conString);
 
-            //load the data
             string SQLStr = "SELECT* FROM tblUsers";
             SqlCommand cmd = new SqlCommand(SQLStr, con);
             SqlDataAdapter adapter = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
             adapter.Fill(ds, "tblUsers");
 
-            //delete chosen rows
             for (int i = 1; i < Request.Form.Count; i++)
             {
                 if (Request.Form.AllKeys[i].Contains("chk"))
@@ -137,12 +113,10 @@ namespace project2
                 }
             }
 
-            //update
             SqlCommandBuilder builder = new SqlCommandBuilder(adapter);
             adapter.UpdateCommand = builder.GetDeleteCommand();
             adapter.Update(ds, "tblUsers");
 
-            // הדפסת הטבלה המעודכנת //
             string table = BuildUsersTable(ds.Tables["tblUsers"]);
             tableDiv.InnerHtml = table;
         }

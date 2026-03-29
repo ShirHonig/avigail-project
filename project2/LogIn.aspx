@@ -27,10 +27,10 @@
             var password = document.getElementById('<%= txtPassword.ClientID %>').value;
             var messageLabel = document.getElementById('<%= message.ClientID %>');
 
-            // Clear previous error message
+            // clear previous error message
             messageLabel.innerText = "";
 
-            // Username validation
+            // username validation
             if (username === "") {
                 messageLabel.innerText = "Please fill in username.";
                 return false;
@@ -50,7 +50,7 @@
                 }
             }
 
-            // Password validation
+            // password validation
             if (password === "") {
                 messageLabel.innerText = "Please fill in password.";
                 return false;
@@ -96,7 +96,7 @@
                 }
             }
 
-            return true; // Form is valid
+            return true; // form is valid
         }
 
         function resetForm() {

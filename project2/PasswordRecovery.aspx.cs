@@ -23,7 +23,7 @@ namespace project2
                     if (rowsAffected > 0)
                     {
                         message.Text = "Password updated successfully! You can now log in.";
-                        Session["LoginAttempts"] = 0; // Reset login attempts
+                        Session["LoginAttempts"] = 0;
                     }
                     else
                     {

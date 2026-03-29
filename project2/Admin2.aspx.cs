@@ -7,14 +7,12 @@ namespace project2
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // Restrict access to admins
             if (Session["Login"] == null || !(bool)Session["Login"] || Session["Admin"] == null || !(bool)Session["Admin"])
             {
                 Sessions.InnerHtml = "Access denied. Admins only.";
                 return;
             }
 
-            // Initialize default values if Application state is null
             Application.Lock();
             if (Application["SessionsNum"] == null) Application["SessionsNum"] = 0;
             if (Application["LoginSessions"] == null) Application["LoginSessions"] = 0;
@@ -22,7 +20,6 @@ namespace project2
             if (Application["activeUsers"] == null) Application["activeUsers"] = 0;
             Application.UnLock();
 
-            // Display session statistics
             Sessions.InnerHtml = "Total number of site visits: " + Application["SessionsNum"].ToString() + "<br>" +
                                  "Total registered visits: " + Application["LoginSessions"].ToString() + "<br>" +
                                  "Total current active users: " + Application["currentSession"].ToString() + "<br>" +
